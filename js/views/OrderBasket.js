@@ -1,0 +1,3 @@
+const OrderBasket = {
+  name: 'OrderBasket'
+};

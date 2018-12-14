@@ -1,0 +1,3 @@
+const CategoryPage = {
+  name: 'CategoryPage'
+};

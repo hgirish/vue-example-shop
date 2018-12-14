@@ -1,0 +1,3 @@
+const OrderCheckout = {
+  name: 'OrderCheckout'
+};

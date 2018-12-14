@@ -1,0 +1,3 @@
+const PageNotFound = {
+  name: 'PageNotFound'
+};

@@ -1,0 +1,3 @@
+const ProductPage = {
+  name: 'ProductPage'
+};
