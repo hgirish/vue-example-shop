@@ -30,7 +30,7 @@ width="100"
   </div>
 
   <div class="variations">
-  <select v-model="variation">
+  <select v-model="variation" v-if="product.variationProducts.length > 1">
   <option
   v-for="variation in product.variationProducts"
   :key="variation.barcode"
@@ -54,6 +54,7 @@ width="100"
   },
   data() {
     return {
+      slug: this.$route.params.slug,
       productNotFound: false,
       image: false,
       variation: false
@@ -64,7 +65,7 @@ width="100"
       let product;
 
       if (Object.keys(this.$store.state.products).length) {
-        product = this.$store.state.products[this.$route.params.slug];
+        product = this.$store.state.products[this.slug];
         if (product) {
           this.productNotFound = false;
           this.variation = product.variationProducts[0];
@@ -74,7 +75,6 @@ width="100"
         if (!product) {
           this.productNotFound = true;
         }
-        console.log(product);
       }
       return product;
     }
@@ -103,6 +103,9 @@ width="100"
       if (v.hasOwnProperty('image')) {
         this.updateImage(v.image);
       }
+    },
+    $route(to) {
+      this.slug = to.params.slug;
     }
   }
 };
