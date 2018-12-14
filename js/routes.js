@@ -1,6 +1,11 @@
 const router = new VueRouter({
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      component: HomePage
+    },
+    {
       path: '/product/:slug',
       component: ProductPage
     },
