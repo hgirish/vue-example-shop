@@ -18,13 +18,32 @@ width="100"
   </template>
   </div>
   </div>
-  <h1>{{product.title}}</h1>
+  <h1>{{product.title}} - \${{variation.price}}</h1>
   <div class="meta">
   <span>Manufacturer: <strong>{{product.vendor.title}}</strong></span>
   <span v-if="product.type">
   Category: <strong>{{product.type}}</strong>
   </span>
+  <span>
+  Quantity: <strong>{{variation.quantity}}</strong>
+  </span>
   </div>
+
+  <div class="variations">
+  <select v-model="variation">
+  <option
+  v-for="variation in product.variationProducts"
+  :key="variation.barcode"
+  :value="variation"
+  v-html="variantTitle(variation) + ((!variation.quantity) ? ' - out of stock' : '')"></option>
+  </select>
+  <button @click="addToBasket()"
+  :disabled="!variation.quantity">
+  {{(variation.quantity) ? 'Add to basket' : 'Out of stock'}} 
+  </button>
+
+  </div>
+
  <div v-html="product.body"></div>
   </div>
   <page-not-found v-if="productNotFound"></page-not-found>
@@ -37,7 +56,8 @@ width="100"
     return {
       productNotFound: false,
       image: false,
-    }
+      variation: false
+    };
   },
   computed: {
     product() {
@@ -47,7 +67,8 @@ width="100"
         product = this.$store.state.products[this.$route.params.slug];
         if (product) {
           this.productNotFound = false;
-          this.image = (product.images.length) ? product.images[0] : false;
+          this.variation = product.variationProducts[0];
+          this.image = product.images.length ? product.images[0] : false;
         }
 
         if (!product) {
@@ -61,6 +82,27 @@ width="100"
   methods: {
     updateImage(img) {
       this.image = img;
+    },
+    variantTitle(variation) {
+      let variants = variation.variant;
+      let output = [];
+      for (let a in variants) {
+        output.push(`<b>${variants[a].name}: <b> ${variants[a].value}`);
+      }
+      return output.join(' / ');
+    },
+    addToBasket() {
+      alert(
+        `Added to basket: ${this.product.title} =
+         ${this.variantTitle(this.variation)}`
+      );
+    }
+  },
+  watch: {
+    variation(v) {
+      if (v.hasOwnProperty('image')) {
+        this.updateImage(v.image);
+      }
     }
   }
 };

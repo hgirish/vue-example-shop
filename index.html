@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue Example Shop</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vue Example Shop</title>
-</head>
-
-<body>
-  <div class="container">
-    <div id="app">
-      <router-view></router-view>
-
+  <body>
+    <div class="container">
+      <div id="app"><router-view></router-view></div>
     </div>
-  </div>
-  <aside>
-    <ul>
-      <li><a href="#/product/650c-micro-wheelset">650C 45mm Micro Wheelset</a></li>
-      <li>
-        <a href="#/product/15mm-combo-wrench">15mm Combo Wrench</a>
-      </li>
-      <li>
-        <a href="#/product/non-existent-product">Non-existent product</a>
-      </li>
-    </ul>
+    <aside>
+      <ul>
+        <li>
+          <a href="#/product/650c-micro-wheelset">650C 45mm Micro Wheelset</a>
+        </li>
+        <li><a href="#/product/15mm-combo-wrench">15mm Combo Wrench</a></li>
+        <li>
+          <a href="#/product/keirin-pro-track-frame">Out of stock item</a>
+        </li>
+        <li>
+          <a href="#/product/non-existent-product">Non-existent product</a>
+        </li>
+      </ul>
+    </aside>
+    <script type="text/javascript" src="/js/libs/csv.js"></script>
+    <script src="/js/libs/vue-shopify-products.js"></script>
 
-  </aside>
-  <script type="text/javascript" src="/js/libs/csv.js"></script>
-  <script src="/js/libs/vue-shopify-products.js"></script>
+    <!-- Libraries -->
+    <script type="text/javascript" src="js/libs/vue.js"></script>
+    <script type="text/javascript" src="js/libs/vuex.js"></script>
+    <script type="text/javascript" src="js/libs/router.js"></script>
 
-  <!-- Libraries -->
-  <script type="text/javascript" src="js/libs/vue.js"></script>
-  <script type="text/javascript" src="js/libs/vuex.js"></script>
-  <script type="text/javascript" src="js/libs/router.js"></script>
+    <!-- Components -->
+    <script src="js/components/ListCategories.js"></script>
+    <script src="js/components/ListProducts.js"></script>
+    <script src="js/components/ListPurchases.js"></script>
+    <script src="js/components/ProductFiltering.js"></script>
+    <!-- Views -->
+    <script src="js/views/PageNotFound.js"></script>
+    <script src="js/views/CategoryPage.js"></script>
+    <script src="js/views/HomePage.js"></script>
+    <script src="js/views/OrderBasket.js"></script>
+    <script src="js/views/OrderCheckout.js"></script>
+    <script src="js/views/OrderConfirmation.js"></script>
+    <script src="js/views/ProductPage.js"></script>
 
-  <!-- Components -->
-  <script src="js/components/ListCategories.js"></script>
-  <script src="js/components/ListProducts.js"></script>
-  <script src="js/components/ListPurchases.js"></script>
-  <script src="js/components/ProductFiltering.js"></script>
-  <!-- Views -->
-  <script src="js/views/PageNotFound.js"></script>
-  <script src="js/views/CategoryPage.js"></script>
-  <script src="js/views/HomePage.js"></script>
-  <script src="js/views/OrderBasket.js"></script>
-  <script src="js/views/OrderCheckout.js"></script>
-  <script src="js/views/OrderConfirmation.js"></script>
-  <script src="js/views/ProductPage.js"></script>
-
-  <script src="/js/store.js"></script>
-  <script src="/js/routes.js"></script>
-  <!-- App -->
-  <script type="text/javascript" src="js/app.js"></script>
-
-</body>
-
+    <script src="/js/store.js"></script>
+    <script src="/js/routes.js"></script>
+    <!-- App -->
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
 </html>
