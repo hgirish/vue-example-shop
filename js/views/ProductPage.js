@@ -39,7 +39,7 @@ width="100"
   </select>
   <button @click="addToBasket()"
   :disabled="!variation.quantity">
-  {{(variation.quantity) ? 'Add to basket' : 'Out of stock'}} 
+  {{(variation.quantity) ? 'Add to basket' : 'Out of stock'}}
   </button>
 
   </div>
@@ -47,6 +47,9 @@ width="100"
  <div v-html="product.body"></div>
   </div>
   <page-not-found v-if="productNotFound"></page-not-found>
+
+
+
   </div>
   `,
   components: {
