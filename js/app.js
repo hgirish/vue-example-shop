@@ -6,7 +6,7 @@ var app = new Vue({
   created() {
     CSV.fetch({ url: './data/csv-files/bicycles.csv' }).then(data => {
       let products = this.$formatProducts(data);
-      this.$store.commit('products', products);
+      this.$store.dispatch('initializeShop', products);
     });
   }
 });

@@ -1,55 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Vue Example Shop</title>
-  </head>
 
-  <body>
-    <div class="container">
-      <div id="app"><router-view></router-view></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vue Example Shop</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-dark  bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Company name</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Sign out</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div id="app" class="mt-2">
+      <div class="row">
+        <nav class="col-md-3 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <aside>
+              <router-view name="sidebar"></router-view>
+            </aside>
+          </div>
+        </nav>
+        <main role="main" class="col-md-8 ml-sm-auto col-lg-9 px-4">
+          <router-view></router-view>
+        </main>
+      </div>
+
+
     </div>
-    <aside>
-      <ul>
-        <li>
-          <a href="#/product/650c-micro-wheelset">650C 45mm Micro Wheelset</a>
-        </li>
-        <li><a href="#/product/15mm-combo-wrench">15mm Combo Wrench</a></li>
-        <li>
-          <a href="#/product/keirin-pro-track-frame">Out of stock item</a>
-        </li>
-        <li>
-          <a href="#/product/non-existent-product">Non-existent product</a>
-        </li>
-      </ul>
-    </aside>
-    <script type="text/javascript" src="/js/libs/csv.js"></script>
-    <script src="/js/libs/vue-shopify-products.js"></script>
+  </div>
 
-    <!-- Libraries -->
-    <script type="text/javascript" src="js/libs/vue.js"></script>
-    <script type="text/javascript" src="js/libs/vuex.js"></script>
-    <script type="text/javascript" src="js/libs/router.js"></script>
+  <script type="text/javascript" src="/js/libs/csv.js"></script>
+  <script src="/js/libs/vue-shopify-products.js"></script>
 
-    <!-- Components -->
-    <script src="js/components/ListCategories.js"></script>
-    <script src="js/components/ListProducts.js"></script>
-    <script src="js/components/ListPurchases.js"></script>
-    <script src="js/components/ProductFiltering.js"></script>
-    <!-- Views -->
-    <script src="js/views/PageNotFound.js"></script>
-    <script src="js/views/CategoryPage.js"></script>
-    <script src="js/views/HomePage.js"></script>
-    <script src="js/views/OrderBasket.js"></script>
-    <script src="js/views/OrderCheckout.js"></script>
-    <script src="js/views/OrderConfirmation.js"></script>
-    <script src="js/views/ProductPage.js"></script>
+  <!-- Libraries -->
+  <script type="text/javascript" src="js/libs/vue.js"></script>
+  <script type="text/javascript" src="js/libs/vuex.js"></script>
+  <script type="text/javascript" src="js/libs/router.js"></script>
 
-    <script src="/js/store.js"></script>
-    <script src="/js/routes.js"></script>
-    <!-- App -->
-    <script type="text/javascript" src="js/app.js"></script>
-  </body>
+  <!-- Components -->
+  <script src="js/components/ListCategories.js"></script>
+  <script src="js/components/ListProducts.js"></script>
+  <script src="js/components/ListPurchases.js"></script>
+  <script src="js/components/ProductFiltering.js"></script>
+  <!-- Views -->
+  <script src="js/views/PageNotFound.js"></script>
+  <script src="js/views/CategoryPage.js"></script>
+  <script src="js/views/HomePage.js"></script>
+  <script src="js/views/OrderBasket.js"></script>
+  <script src="js/views/OrderCheckout.js"></script>
+  <script src="js/views/OrderConfirmation.js"></script>
+  <script src="js/views/ProductPage.js"></script>
+
+  <script src="/js/store.js"></script>
+  <script src="/js/routes.js"></script>
+  <!-- App -->
+  <script type="text/javascript" src="js/app.js"></script>
+</body>
+
 </html>

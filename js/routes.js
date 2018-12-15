@@ -3,10 +3,20 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'Home',
-      component: HomePage
+      components: {
+        default: HomePage,
+        sidebar: ListCategories
+      }
+    },
+    {
+      path: '/category/:slug',
+      name: 'Category',
+      component: CategoryPage,
+      props: true
     },
     {
       path: '/product/:slug',
+      name: 'Product',
       component: ProductPage
     },
     {
