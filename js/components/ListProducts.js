@@ -1,7 +1,15 @@
 Vue.component('list-products', {
   template: `
   <div v-if="products">
-
+<div class="ordering">
+<select v-model="ordering">
+<option value="">Order products</option>
+<option value="title-asc">Title - ascending (A - Z)</option>
+<option value="title-desc">Title - descending (Z - A)</option>
+<option value="price-asc">Price - ascending ($1 - $999)</option>
+<option value="price-desc">Price - descending ($999 - $1)</option>
+</select>
+</div>
   <p v-if="pagination.totalPages > 1">
   Page {{currentPage}} out of {{pagination.totalPages}}
   </p>
@@ -35,7 +43,7 @@ Vue.component('list-products', {
   </router-link>
   </h3>
   <p>Made by: {{product.vendor.title}}</p>
-  <p>Price {{productPrice(product.variationProducts)}}</p>
+  <p>Price {{productPrice(product)}}</p>
   </li>
   </ol>
 
@@ -58,6 +66,7 @@ Vue.component('list-products', {
       perPage: 12,
       currentPage: 1,
       pageLinkCount: 3,
+      ordering: '',
     };
   },
   created() {
@@ -66,6 +75,24 @@ Vue.component('list-products', {
     }
   },
   computed: {
+    orderProducts() {
+      let output = this.products;
+      if (this.ordering.length) {
+        let orders = this.ordering.split('-');
+        output = output.sort(function (a, b) {
+          if (typeof a[orders[0]] == 'string') {
+            return a[orders[0]].localeCompare(b[orders[0]]);
+          } else {
+            return a[orders[0]] - b[orders[0]];
+          }
+        });
+
+        if (orders[1] == 'desc') {
+          output.reverse();
+        }
+      }
+      return output;
+    },
 
     pagination() {
       if (this.products) {
@@ -107,20 +134,15 @@ Vue.component('list-products', {
       });
       this.currentPage = page;
     },
-    paginate(list) {
-      return list.slice(this.pagination.range.from, this.pagination.range.to);
+    paginate() {
+      return this.orderProducts.slice(this.pagination.range.from, this.pagination.range.to);
     },
-    productPrice(variations) {
-      let prices = [];
-      for (let variation of variations) {
-        if (!prices.includes(variation.price)) {
-          prices.push(variation.price);
-        }
-      }
+    productPrice(product) {
 
-      let price = '$' + Math.min(...prices);
 
-      if (prices.length > 1) {
+      let price = '$' + product.price;
+
+      if (product.hasManyPrices) {
         price = 'From: ' + price;
       }
       return price;

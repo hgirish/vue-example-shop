@@ -2,10 +2,60 @@ const store = new Vuex.Store({
   state: {
     products: {},
     categories: {},
+    categoryHome: {
+      title: 'Welcome to the Shop',
+      handle: 'home',
+      products: [
+        'adjustable-stem',
+        'colorful-fixie-lima',
+        'fizik-saddle-pak',
+        'kenda-tube',
+        'oury-grip-set',
+        'pure-fix-pedals-with-cages'
+      ]
+    },
+  },
+  getters: {
+    categoriesExist: (state) => {
+      return Object.keys(state.categories).length;
+    },
+    categoryProducts: (state, getters) => (slug) => {
+      if (getters.categoriesExist) {
+        let category = false;
+        let products = [];
+        if (slug) {
+          category = state.categories[slug];
+        } else {
+          category = this.categoryHome;
+        }
+
+        if (category) {
+          for (let featured of category.products) {
+            products.push(state.products[featured]);
+          }
+          category.productDetails = products;
+        }
+        return category;
+      }
+    },
   },
   mutations: {
     products(state, payload) {
-      state.products = payload;
+      let products = {}
+      Object.keys(payload).forEach(key => {
+        let product = payload[key];
+        let prices = [];
+        for (let variation of product.variationProducts) {
+          if (!prices.includes(variation.price)) {
+            prices.push(variation.price);
+          }
+        }
+
+        product.price = Math.min(...prices);
+        product.hasManyPrices = prices.length > 1;
+        products[key] = product;
+      })
+      state.products = products;
     },
     categories(state, payload) {
       let categories = {};

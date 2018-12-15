@@ -15,13 +15,27 @@ const router = new VueRouter({
     {
       path: '/category/:slug',
       name: 'Category',
-      component: CategoryPage,
-      props: true
+      components: {
+        default: CategoryPage,
+        sidebar: ListCategories
+      },
+      props: {
+        default: true,
+        sidebar: true
+      }
     },
     {
       path: '/product/:slug',
       name: 'Product',
-      component: ProductPage
+      components: {
+        default: ProductPage,
+        sidebar: ListCategories
+      },
+      props: {
+        default: true,
+        sidebar: true
+      }
+
     },
     {
       path: '/404',
