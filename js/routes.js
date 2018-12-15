@@ -4,8 +4,12 @@ const router = new VueRouter({
       path: '/',
       name: 'Home',
       components: {
-        default: HomePage,
+        default: CategoryPage,
         sidebar: ListCategories
+      },
+      props: {
+        default: true,
+        sidebar: true
       }
     },
     {
