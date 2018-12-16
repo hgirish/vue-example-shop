@@ -122,6 +122,9 @@ const store = new Vuex.Store({
         });
       }
     },
+    updatePurchases(state, payload) {
+      state.basket = payload;
+    }
   },
   actions: {
     initializeShop({ commit }, products) {

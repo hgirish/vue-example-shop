@@ -24,8 +24,15 @@ width="80" />
 <br /><span v-html="product.variationTitle"></span>
 </td>
 <td>{{product.variation.price | currency}}</td>
-<td>{{product.quantity}}</td>
+<td v-if="!editable">{{product.quantity}}</td>
+<td v-if="editable">
+<input type="number" step="1" :value="product.quantity"
+@blur="updateQuantity($event,product.sku)" />
+</td>
 <td>{{product.variation.price * product.quantity | currency}}</td>
+<td v-if="editable">
+<button @click="removeItem(product.sku)">Remove Item</button>
+</td>
 </tr>
 </tbody>
 <tfoot>
@@ -35,6 +42,12 @@ width="80" />
 <td>{{ totalPrice | currency }}</td>
 </tfoot>
   </table>`,
+  props: {
+    editable: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     products() {
       return this.$store.state.basket;
@@ -51,5 +64,28 @@ width="80" />
     currency(val) {
       return '$' + val.toFixed(2);
     }
-  }
+  },
+  methods: {
+    updateQuantity(e, sku) {
+      if (!parseInt(e.target.value)) {
+        this.removeItem(sku);
+      } else {
+        let products = this.products.map(p => {
+          if (p.sku == sku) {
+            p.quantity = parseInt(e.target.value);
+          }
+          return p;
+        });
+        this.$store.commit('updatePurchases', products);
+      }
+    },
+    removeItem(sku) {
+      let products = this.products.filter(p => {
+        if (p.sku != sku) {
+          return p;
+        }
+      });
+      this.$store.commit('updatePurchases', products);
+    },
+  },
 }
