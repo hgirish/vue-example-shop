@@ -2,7 +2,7 @@ const ListCategories = {
   name: 'ListCategories',
   template: `
 <div v-if="categories">
-<ul class="nav flex-column">
+<ul class="nav nav-pills flex-column">
 <li class="nav-item" v-for="category in categories">
 <router-link
 class="nav-link" exact-active-class="active"

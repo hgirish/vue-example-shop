@@ -13,6 +13,10 @@ const router = new VueRouter({
       }
     },
     {
+      path: '/',
+      redirect: { name: 'Home' }
+    },
+    {
       path: '/category/:slug',
       name: 'Category',
       components: {
@@ -23,6 +27,10 @@ const router = new VueRouter({
         default: true,
         sidebar: true
       }
+    },
+    {
+      path: '/product',
+      redirect: { name: 'Home' }
     },
     {
       path: '/product/:slug',
@@ -36,6 +44,21 @@ const router = new VueRouter({
         sidebar: true
       }
 
+    },
+    {
+      path: '/basket',
+      name: 'Basket',
+      component: OrderBasket
+    },
+    {
+      path: '/checkout',
+      name: 'Checkout',
+      component: OrderCheckout
+    },
+    {
+      path: '/complete',
+      name: 'Confirmation',
+      component: OrderConfirmation
     },
     {
       path: '/404',

@@ -8,7 +8,7 @@ const ProductFiltering = {
   <label class="filter" v-for="value in filter.values">
 <input type="checkbox" :value="value.handle"
 v-model="filter.checked" @click="updateFilters" />
-{{value.title}} ({{value.count}})
+{{value.title}} ({{ value.count.length }})
   </label>
   </div>
   </div>
