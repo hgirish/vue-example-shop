@@ -8,5 +8,11 @@ var app = new Vue({
       let products = this.$formatProducts(data);
       this.$store.dispatch('initializeShop', products);
     });
+  },
+  computed: {
+    cartQuantity() {
+      const quantity = this.$store.getters.cartQuantity;
+      return quantity ? `(${quantity})` : '';
+    }
   }
 });

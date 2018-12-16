@@ -17,7 +17,7 @@ const router = new VueRouter({
       name: 'Category',
       components: {
         default: CategoryPage,
-        sidebar: ListCategories
+        sidebar: ProductFiltering
       },
       props: {
         default: true,

@@ -14,6 +14,7 @@ const store = new Vuex.Store({
         'pure-fix-pedals-with-cages'
       ]
     },
+    basket: [],
   },
   getters: {
     categoriesExist: (state) => {
@@ -38,6 +39,13 @@ const store = new Vuex.Store({
         return category;
       }
     },
+    cartQuantity: (state) => {
+      let quantity = 0;
+      for (let item of state.basket) {
+        quantity += item.quantity;
+      }
+      return quantity;
+    }
   },
   mutations: {
     products(state, payload) {
@@ -94,6 +102,25 @@ const store = new Vuex.Store({
       });
       state.categories = categoriesSorted
 
+    },
+    addToBasket(state, item) {
+      let product = state.basket.find(p => {
+        if (p.sku == item.variation.sku) {
+          p.quantity++;
+          return p;
+        }
+      })
+      if (!product) {
+        state.basket.push({
+          sku: item.variation.sku,
+          title: item.product.title,
+          handle: item.slug,
+          image: item.image,
+          variationTitle: item.variantTitle(item.variation),
+          variation: item.variation,
+          quantity: 1
+        });
+      }
     },
   },
   actions: {

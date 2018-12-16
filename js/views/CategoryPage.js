@@ -30,6 +30,16 @@ const CategoryPage = {
     category() {
       if (this.categoriesExist) {
         let category = this.categoryProducts(this.slug);
+        let filters = Object.assign({}, this.$route.query);
+
+        if (Object.keys(filters).length && filters.hasOwnProperty('page')) {
+          delete filters.page;
+        }
+        if (Object.keys(filters).length) {
+          category.productDetails = category.productDetails.filter(
+            p => this.filtering(p, filters)
+          )
+        }
         if (!category) {
           this.categoryNotFound = true;
         }
@@ -38,4 +48,43 @@ const CategoryPage = {
     },
 
   },
+  methods: {
+    filtering(product, query) {
+      let display = false;
+      let hasProperty = {};
+
+      Object.keys(query).forEach(key => {
+        let filter = Array.isArray(query[key]) ? query[key] : [query[key]];
+
+        for (attribute of filter) {
+          if (key == 'vendor') {
+            hasProperty.vendor = false;
+            if (product.vendor.handle == attribute) {
+              hasProperty.vendor = true;
+            }
+          } else if (key == 'tags') {
+            hasProperty.tags = false;
+
+            product[key].map(key => {
+              if (key.handle == attribute) {
+                hasProperty.tags = true;
+              }
+            });
+          } else {
+            hasProperty[key] = false;
+
+            let variant = product.variationProducts.map(v => {
+              if (v.variant[key] && v.variant[key].handle == attribute) {
+                hasProperty[key] = true;
+              }
+            });
+          }
+        }
+        if (Object.keys(hasProperty).every(key => hasProperty[key])) {
+          display = true;
+        }
+      });
+      return display;
+    }
+  }
 };

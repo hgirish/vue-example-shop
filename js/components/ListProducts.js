@@ -32,7 +32,7 @@ Vue.component('list-products', {
   v-if="pagination.totalPages > 1">Next Page</button>
 
   <ol class="row" :start="pagination.range.from + 1">
-  <li class="col-md-4" v-for="product in paginate(products)" v-if="product">
+  <li class="col-md-4" v-for="product in paginate(products)" :key="product.handle" v-if="product">
   <router-link :to="{name:'Product',params:{slug: product.handle}}">
   <img v-if="product.images[0]" :src="product.images[0].source"
   :alt="product.title" width="120" />

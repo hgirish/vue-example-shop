@@ -38,8 +38,11 @@ width="100"
   v-html="variantTitle(variation) + ((!variation.quantity) ? ' - out of stock' : '')"></option>
   </select>
   <button @click="addToBasket()"
+  :class="(addedToBasket) ? 'isAdded' : ''"
   :disabled="!variation.quantity">
-  {{(variation.quantity) ? 'Add to basket' : 'Out of stock'}}
+  {{(variation.quantity) ?
+    ((addedToBasket) ? 'Added to your basket' :
+     'Add to basket') : 'Out of stock'}}
   </button>
 
   </div>
@@ -60,7 +63,8 @@ width="100"
       slug: this.$route.params.slug,
       productNotFound: false,
       image: false,
-      variation: false
+      variation: false,
+      addedToBasket: false,
     };
   },
   computed: {
@@ -95,10 +99,11 @@ width="100"
       return output.join(' / ');
     },
     addToBasket() {
-      alert(
-        `Added to basket: ${this.product.title} =
-         ${this.variantTitle(this.variation)}`
-      );
+      this.$store.commit('addToBasket', this);
+      this.addedToBasket = true;
+      setTimeout(() => {
+        this.addedToBasket = false
+      }, 2000);
     }
   },
   watch: {
@@ -106,9 +111,11 @@ width="100"
       if (v.hasOwnProperty('image')) {
         this.updateImage(v.image);
       }
+      this.addedToBasket = false;
     },
     $route(to) {
       this.slug = to.params.slug;
+      this.addedToBasket = false;
     }
   }
 };
