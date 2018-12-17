@@ -1,4 +1,7 @@
-const CategoryPage = {
+import PageNotFound from './PageNotFound.js';
+import ListProducts from '../components/ListProducts.js';
+
+export default {
   name: 'CategoryPage',
   template: `
   <div>
@@ -11,22 +14,18 @@ const CategoryPage = {
   `,
   components: {
     PageNotFound,
+    ListProducts
   },
   props: {
-    slug: String,
-
+    slug: String
   },
   data() {
     return {
-      categoryNotFound: false,
-
-    }
+      categoryNotFound: false
+    };
   },
   computed: {
-    ...Vuex.mapGetters([
-      'categoryProducts',
-      'categoriesExist'
-    ]),
+    ...Vuex.mapGetters(['categoryProducts', 'categoriesExist']),
     category() {
       if (this.categoriesExist) {
         let category = this.categoryProducts(this.slug);
@@ -36,17 +35,16 @@ const CategoryPage = {
           delete filters.page;
         }
         if (Object.keys(filters).length) {
-          category.productDetails = category.productDetails.filter(
-            p => this.filtering(p, filters)
-          )
+          category.productDetails = category.productDetails.filter(p =>
+            this.filtering(p, filters)
+          );
         }
         if (!category) {
           this.categoryNotFound = true;
         }
         return category;
       }
-    },
-
+    }
   },
   methods: {
     filtering(product, query) {

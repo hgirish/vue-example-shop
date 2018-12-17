@@ -1,4 +1,6 @@
-const OrderBasket = {
+import ListPurchases from '../components/ListPurchases.js';
+
+export default {
   name: 'OrderBasket',
   template: `
   <div>
@@ -7,6 +9,6 @@ const OrderBasket = {
   <router-link :to="{name:'Checkout'}">Proceed to Checkout</router-link>
   </div>`,
   components: {
-    ListPurchases,
+    ListPurchases
   }
 };

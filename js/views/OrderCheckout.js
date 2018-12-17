@@ -1,4 +1,5 @@
-const OrderCheckout = {
+import ListPurchases from '../components/ListPurchases.js';
+export default {
   name: 'OrderCheckout',
   template: `<div>
   <h1>Order Confirmation</h1>
@@ -50,7 +51,7 @@ const OrderCheckout = {
         address: '',
         zipcode: ''
       }
-    }
+    };
   },
   methods: {
     submitForm() {

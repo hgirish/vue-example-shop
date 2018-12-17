@@ -1,4 +1,6 @@
-const ProductFiltering = {
+import ListCategories from './ListCategories.js';
+
+export default {
   name: 'ProductFiltering',
   template: `
   <div>
@@ -19,19 +21,15 @@ v-model="filter.checked" @click="updateFilters" />
     ListCategories
   },
   props: {
-    slug: String,
-
+    slug: String
   },
   data() {
     return {
-      topics: this.defaultTopics,
-    }
+      topics: this.defaultTopics
+    };
   },
   computed: {
-    ...Vuex.mapGetters([
-      'categoryProducts',
-      'categoriesExist'
-    ]),
+    ...Vuex.mapGetters(['categoryProducts', 'categoriesExist']),
     filters() {
       if (this.categoriesExist) {
         let category = this.categoryProducts(this.slug);
@@ -55,7 +53,7 @@ v-model="filter.checked" @click="updateFilters" />
                 ...variation,
                 checked: [],
                 values: {}
-              }
+              };
             }
 
             Object.keys(product.variationProducts).forEach(pkey => {
@@ -65,9 +63,9 @@ v-model="filter.checked" @click="updateFilters" />
                 this.topics[variation.handle],
                 vp.variant[variation.handle],
                 product.handle
-              )
-            })
-          })
+              );
+            });
+          });
         }
 
         Object.keys(this.$route.query).forEach(key => {
@@ -75,13 +73,10 @@ v-model="filter.checked" @click="updateFilters" />
             let query = this.$route.query[key];
             this.topics[key].checked = Array.isArray(query) ? query : [query];
           }
-        })
-
-
+        });
       }
       return this.topics;
-    },
-
+    }
   },
   methods: {
     defaultTopics() {
@@ -98,7 +93,7 @@ v-model="filter.checked" @click="updateFilters" />
           checked: [],
           values: {}
         }
-      }
+      };
     },
 
     addTopic(category, item, handle) {
@@ -114,7 +109,7 @@ v-model="filter.checked" @click="updateFilters" />
           category.values[item.handle] = {
             ...item,
             count: [handle]
-          }
+          };
         }
       }
     },
@@ -127,11 +122,11 @@ v-model="filter.checked" @click="updateFilters" />
         }
       });
       this.$router.push({ query: filters });
-    },
+    }
   },
   watch: {
     slug() {
       this.topics = this.defaultTopics();
     }
   }
-}
+};

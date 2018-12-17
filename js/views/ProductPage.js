@@ -1,5 +1,11 @@
-const ProductPage = {
+import PageNotFound from './PageNotFound.js';
+import ListProducts from '../components/ListProducts.js';
+
+export default {
   name: 'ProductPage',
+  components: {
+    ListProducts
+  },
   template: `
   <div>
   <div v-if="product">
@@ -64,7 +70,7 @@ width="100"
       productNotFound: false,
       image: false,
       variation: false,
-      addedToBasket: false,
+      addedToBasket: false
     };
   },
   computed: {
@@ -102,7 +108,7 @@ width="100"
       this.$store.commit('addToBasket', this);
       this.addedToBasket = true;
       setTimeout(() => {
-        this.addedToBasket = false
+        this.addedToBasket = false;
       }, 2000);
     }
   },

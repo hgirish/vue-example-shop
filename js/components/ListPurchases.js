@@ -1,4 +1,4 @@
-const ListPurchases = {
+export default {
   name: 'ListPurchases',
   template: `<table class="table">
   <thead>
@@ -55,10 +55,10 @@ width="80" />
     totalPrice() {
       let total = 0;
       for (let p of this.products) {
-        total += (p.variation.price * p.quantity);
+        total += p.variation.price * p.quantity;
       }
       return total;
-    },
+    }
   },
   filters: {
     currency(val) {
@@ -86,6 +86,6 @@ width="80" />
         }
       });
       this.$store.commit('updatePurchases', products);
-    },
-  },
-}
+    }
+  }
+};

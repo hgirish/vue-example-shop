@@ -1,4 +1,4 @@
-const PageNotFound = {
+export default {
   name: 'PageNotFound',
   template: `
   <div>

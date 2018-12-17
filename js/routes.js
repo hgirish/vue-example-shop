@@ -1,4 +1,13 @@
-const router = new VueRouter({
+import CategoryPage from './views/CategoryPage.js';
+import ProductPage from './views/ProductPage.js';
+import PageNotFound from './views/PageNotFound.js';
+import OrderBasket from './views/OrderBasket.js';
+import OrderConfirmation from './views/OrderConfirmation.js';
+import OrderCheckout from './views/OrderCheckout.js';
+import ListCategories from './components/ListCategories.js';
+import ProductFiltering from './components/ProductFiltering.js';
+
+export default new VueRouter({
   routes: [
     {
       path: '/',
@@ -43,7 +52,6 @@ const router = new VueRouter({
         default: true,
         sidebar: true
       }
-
     },
     {
       path: '/basket',

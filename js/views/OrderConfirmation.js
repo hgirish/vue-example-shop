@@ -1,4 +1,6 @@
-const OrderConfirmation = {
+import ListPurchases from '../components/ListPurchases.js';
+
+export default {
   name: 'OrderConfirmation',
   template: `<div>
   <h1>Order Complete</h1>

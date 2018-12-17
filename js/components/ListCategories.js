@@ -1,4 +1,4 @@
-const ListCategories = {
+export default {
   name: 'ListCategories',
   template: `
 <div v-if="categories">
@@ -18,4 +18,4 @@ class="nav-link" exact-active-class="active"
       return this.$store.state.categories;
     }
   }
-}
+};

@@ -1,4 +1,5 @@
-Vue.component('list-products', {
+export default {
+  name: 'ListProducts',
   template: `
   <div v-if="products">
 <div class="ordering">
@@ -66,7 +67,7 @@ Vue.component('list-products', {
       perPage: 12,
       currentPage: 1,
       pageLinkCount: 3,
-      ordering: '',
+      ordering: ''
     };
   },
   created() {
@@ -79,7 +80,7 @@ Vue.component('list-products', {
       let output = this.products;
       if (this.ordering.length) {
         let orders = this.ordering.split('-');
-        output = output.sort(function (a, b) {
+        output = output.sort(function(a, b) {
           if (typeof a[orders[0]] == 'string') {
             return a[orders[0]].localeCompare(b[orders[0]]);
           } else {
@@ -135,11 +136,12 @@ Vue.component('list-products', {
       this.currentPage = page;
     },
     paginate() {
-      return this.orderProducts.slice(this.pagination.range.from, this.pagination.range.to);
+      return this.orderProducts.slice(
+        this.pagination.range.from,
+        this.pagination.range.to
+      );
     },
     productPrice(product) {
-
-
       let price = '$' + product.price;
 
       if (product.hasManyPrices) {
@@ -149,7 +151,7 @@ Vue.component('list-products', {
     }
   },
   watch: {
-    '$route'(to) {
+    $route(to) {
       this.currentPage = parseInt(to.query.page) || 1;
     },
     perPage() {
@@ -158,8 +160,8 @@ Vue.component('list-products', {
           query: Object.assign({}, this.$route.query, {
             page: this.pagination.totalPages
           })
-        })
+        });
       }
     }
   }
-});
+};
